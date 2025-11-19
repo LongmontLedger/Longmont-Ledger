@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]><html class="preIE7 preIE8 preIE9"><![endif]-->
+<!--[if IE 7]><html class="preIE8 preIE9"><![endif]-->
+<!--[if IE 8]><html class="preIE9"><![endif]-->
+<!--[if gte IE 9]><!--><html><!--<![endif]-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Longmont Ledger | Local News & Stories – Longmont, Boulder County, Colorado</title>
 
+  <!-- Favicon (use your actual logo URL) -->
+  <link rel="icon" href="https://longmontledger.com/wp-content/uploads/2024/12/android-chrome-512x512-1.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://longmontledger.com/wp-content/uploads/2024/02/favicon.png">
+
+  <!-- Indexing -->
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Meta Description -->
+  <meta name="description" content="The Longmont Ledger is a digital magazine bringing fresh, local stories to Longmont and Boulder County. We cover news, artists, businesses, schools, recreation, events, and Colorado culture while helping Longmont-area companies grow online through features, advertising, and sponsored content. Read us daily at longmontledger.com!">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Longmont Ledger – Local Longmont News & Stories">
+  <meta property="og:description" content="Your daily digital source for Longmont and Boulder County news, business spotlights, arts, events, and Colorado stories.">
+  <meta property="og:url" content="https://longmontledger.github.io/Longmont-Ledger/">
+  <meta property="og:image" content="https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png">
+  <meta property="og:site_name" content="Longmont Ledger">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://longmontledger.github.io/Longmont-Ledger/">
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="Longmont Ledger Latest Articles" href="https://longmontledger.com/feed/">
+
+  <style>
+    body {font-family:'Inter',sans-serif;margin:0;background:#FDFDFB;color:#1f2937;}
+    header {background:#0A2A47;color:white;padding:2rem 1rem 1rem;text-align:center;}
+    header img {max-width:180px;height:auto;margin-bottom:1rem;}
+    header h1 {margin:0;font-size:2.8rem;}
+    header h1 a {color:white;text-decoration:none;}
+    header h1 a:hover {text-decoration:underline;}
+    header h4 {margin:0.5rem 0 0;font-weight:400;font-size:1.1rem;}
+    .container {max-width:960px;margin:2rem auto;padding:0 1rem;}
+    section {margin-bottom:2rem;background:white;padding:1.8rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+    h2,h3 {font-size:1.6rem;margin-top:0;color:#0A2A47;}
+    ul {padding-left:1.25rem;}
+    li {margin-bottom:0.5rem;}
+    .platform-links a {display:inline-block;margin:0.5rem 0.4rem;padding:0.7rem 1.4rem;background:#F68C1F;color:white;border-radius:6px;text-decoration:none;font-weight:600;transition:background .2s;}
+    .platform-links a:hover {background:#5CC3E8;color:#0A2A47;}
+    footer {text-align:center;padding:2rem 1rem;font-size:0.9rem;color:#6b7280;background:#f9fafb;}
+
+    /* RSS Styling */
+    #rss-feed h3 {margin-top:0;font-size:1.6rem;color:#0A2A47;}
+    .rss-item {margin:1.4rem 0;padding-bottom:1rem;border-bottom:1px solid #eee;}
+    .rss-item:last-child {border-bottom:none;}
+    .rss-item a {font-weight:600;color:#F68C1F;text-decoration:none;font-size:1.2rem;}
+    .rss-item a:hover {text-decoration:underline;color:#5CC3E8;}
+    .rss-date {font-size:0.85rem;color:#6b7280;margin:0.25rem 0;}
+    .rss-desc {font-size:0.98rem;color:#374151;line-height:1.5;}
+  </style>
+
+  <!-- Schema.org JSON-LD – NewsMediaOrganization (no physical address) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["NewsMediaOrganization", "Organization"],
+        "@id": "https://longmontledger.com/#organization",
+        "name": "Longmont Ledger",
+        "url": "https://longmontledger.com",
+        "logo": "https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png",
+        "description": "Digital magazine delivering local news, business features, arts, events, and stories for Longmont, Boulder County, and Colorado.",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61571795654213",
+          "https://www.instagram.com/longmontledger/",
+          "https://x.com/LongmontLedger",
+          "https://bsky.app/profile/longmontledger.bsky.social",
+          "https://www.youtube.com/channel/UCfTMdJE67iL5OJjdB9wDrXw",
+          "https://nextdoor.com/page/longmont-ledger"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "info@longmontledger.com",
+          "contactType": "customer service"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Longmont, Boulder County, Colorado"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://longmontledger.com/#website",
+        "url": "https://longmontledger.com",
+        "name": "Longmont Ledger",
+        "publisher": {"@id": "https://longmontledger.com/#organization"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://longmontledger.github.io/Longmont-Ledger/#webpage",
+        "url": "https://longmontledger.github.io/Longmont-Ledger/",
+        "name": "Longmont Ledger – Local News, Stories & Resources",
+        "isPartOf": {"@id": "https://longmontledger.com/#website"}
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <img src="https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png" alt="Longmont Ledger Logo">
+    <h1><a href="https://longmontledger.com/">Longmont Ledger</a></h1>
+    <h4>Local News • Business • Arts • Recreation • Tech • Health in Longmont & Boulder County</h4>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <h3>About the Longmont Ledger</h3>
+      <p>The <strong>Longmont Ledger</strong> is a modern digital revival of one of Longmont’s original newspapers. We publish fresh, community-focused stories every week — from local business features and artist profiles to school news, outdoor recreation, events, and everything that makes Longmont and Boulder County special.</p>
+      <p>We’re also proud to help Longmont-area businesses get discovered online through sponsored content, advertising, and press-release features.</p>
+    </section>
+
+    <section>
+      <h3>Connect With Us</h3>
+      <div class="platform-links">
+        <a href="https://www.facebook.com/longmontledger" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/longmontledger" target="_blank">Instagram</a>
+        <a href="https://twitter.com/longmontledger" target="_blank">Twitter</a>
+        <a href="https://www.linkedin.com/company/longmont-ledger" target="_blank">LinkedIn</a>
+        <a href="https://www.youtube.com/@longmontledger" target="_blank">YouTube</a>
+      </div>
+    </section>
+
+    <section>
+      <h3>Advertise or Submit a Story</h3>
+      <p>Want to get your business or event in front of thousands of local readers? Email us at <a href="mailto:info@longmontledger.com">info@longmontledger.com</a></p>
+    </section>
+
+    <section>
+      <h3>Quick Search for Longmont Ledger</h3>
+      <div class="platform-links">
+        <a href="https://www.google.com/search?q=site:longmontledger.com" target="_blank">Google</a>
+        <a href="https://www.bing.com/search?q=site:longmontledger.com" target="_blank">Bing</a>
+      </div>
+    </section>
+
+    <!-- Live RSS Feed Section -->
+    <section>
+      <div id="rss-feed">Loading the latest Longmont Ledger stories…</div>
+    </section>
+
+  </div>
+
+  <footer>
+    © <script>document.write(new Date().getFullYear());</script> Longmont Ledger – All rights reserved.
+  </footer>
+
+  <!-- RSS Feed + ItemList Schema Script -->
+  <script>
+    const RSS_URL = 'https://longmontledger.com/feed/';
+    const PROXY_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+    fetch(PROXY_URL)
+      .then(r => r.json())
+      .then(data => {
+        if (data.status !== 'ok' || !data.items) throw new Error('Bad feed');
+        const items = data.items.slice(0, 6);
+        renderFeed(items);
+        injectSchema(items);
+      })
+      .catch(() => {
+        document.getElementById('rss-feed').innerHTML = '<p>Unable to load latest articles at the moment. <a href="https://longmontledger.com/">Visit LongmontLedger.com →</a></p>';
+      });
+
+    function renderFeed(items) {
+      const feedDiv = document.getElementById('rss-feed');
+      let html = `<h3>Latest Stories from Longmont Ledger</h3>`;
+      items.forEach(item => {
+        const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const desc = (item.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 180) + '…';
+        html += `
+          <div class="rss-item">
+            <a href="${item.link}" target="_blank">${item.title}</a>
+            <div class="rss-date">${date}</div>
+            <div class="rss-desc">${desc}</div>
+          </div>`;
+      });
+      feedDiv.innerHTML = html;
+    }
+
+    function injectSchema(items) {
+      const newsItems = items.map((it, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "NewsArticle",
+          "headline": it.title,
+          "url": it.link,
+          "datePublished": new Date(it.pubDate).toISOString().split('T')[0],
+          "description": (it.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 200) + "...",
+          "image": it.thumbnail || "https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png",
+          "author": {"@type": "Organization", "name": "Longmont Ledger"},
+          "publisher": {"@id": "https://longmontledger.com/#organization"}
+        }
+      }));
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Latest Articles – Longmont Ledger",
+        "itemListElement": newsItems
+      };
+
+      const s = document.createElement('script');
+      s.type = "application/ld+json";
+      s.text = JSON.stringify(schema);
+      document.head.appendChild(s);
+    }
+  </script>
+</body>
+</html>
