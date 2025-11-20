@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Allow everything – this is a public microsite meant to rank
+Sitemap: https://longmontledger.github.io/Longmont-Ledger/sitemap.xml
