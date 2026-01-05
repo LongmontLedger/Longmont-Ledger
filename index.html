@@ -60,9 +60,11 @@
   footer {text-align:center;padding:2rem 1rem;font-size:0.9rem;color:#6b7280;background:#f1f1f1;}
 
   /* RSS styling – crimson links */
-  #rss-feed h3 {margin-top:0;font-size:1.6rem;color:#1A3C34;}
-  .rss-item a {color:#B71C1C;font-weight:600;font-size:1.2rem;}
-  .rss-item a:hover {color:#8E1414;text-decoration:underline;}
+  #rss-feed h3, #press-feed h3 {margin-top:0;font-size:1.6rem;color:#1A3C34;}
+  .rss-item a, .press-item a {color:#B71C1C;font-weight:600;font-size:1.2rem;}
+  .rss-item a:hover, .press-item a:hover {color:#8E1414;text-decoration:underline;}
+  .rss-date, .press-date {color:#6b7280;font-size:0.95rem;margin:0.3rem 0;}
+  .rss-desc, .press-desc {color:#4b5563;font-size:1rem;margin-top:0.5rem;}
 </style>
 
   <!-- Schema.org JSON-LD – NewsMediaOrganization (no physical address) -->
@@ -83,7 +85,8 @@
           "https://x.com/LongmontLedger",
           "https://bsky.app/profile/longmontledger.bsky.social",
           "https://www.youtube.com/channel/UCfTMdJE67iL5OJjdB9wDrXw",
-          "https://nextdoor.com/page/longmont-ledger"
+          "https://nextdoor.com/page/longmont-ledger",
+          "https://pressadvantage.com/i_organization/longmont-ledger"
         ],
         "contactPoint": {
           "@type": "ContactPoint",
@@ -174,30 +177,35 @@
       <div id="rss-feed">Loading the latest Longmont Ledger stories…</div>
     </section>
 
+    <!-- New Press Releases Section -->
+    <section>
+      <div id="press-feed">Loading the latest press releases…</div>
+    </section>
+
   </div>
 
   <footer>
     © <script>document.write(new Date().getFullYear());</script> Longmont Ledger – All rights reserved.
   </footer>
 
-  <!-- RSS Feed + ItemList Schema Script -->
+  <!-- Articles RSS Feed + Schema Script -->
   <script>
-    const RSS_URL = 'https://longmontledger.com/feed/';
-    const PROXY_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+    const ARTICLES_RSS_URL = 'https://longmontledger.com/feed/';
+    const ARTICLES_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(ARTICLES_RSS_URL)}`;
 
-    fetch(PROXY_URL)
+    fetch(ARTICLES_PROXY)
       .then(r => r.json())
       .then(data => {
         if (data.status !== 'ok' || !data.items) throw new Error('Bad feed');
         const items = data.items.slice(0, 6);
-        renderFeed(items);
-        injectSchema(items);
+        renderArticlesFeed(items);
+        injectArticlesSchema(items);
       })
       .catch(() => {
         document.getElementById('rss-feed').innerHTML = '<p>Unable to load latest articles at the moment. <a href="https://longmontledger.com/">Visit LongmontLedger.com →</a></p>';
       });
 
-    function renderFeed(items) {
+    function renderArticlesFeed(items) {
       const feedDiv = document.getElementById('rss-feed');
       let html = `<h3>Latest Stories from Longmont Ledger</h3>`;
       items.forEach(item => {
@@ -213,8 +221,8 @@
       feedDiv.innerHTML = html;
     }
 
-    function injectSchema(items) {
-      const newsItems = items.map((it, i) => ({
+    function injectArticlesSchema(items) {
+      const listItems = items.map((it, i) => ({
         "@type": "ListItem",
         "position": i + 1,
         "item": {
@@ -233,7 +241,70 @@
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": "Latest Articles – Longmont Ledger",
-        "itemListElement": newsItems
+        "itemListElement": listItems
+      };
+
+      const s = document.createElement('script');
+      s.type = "application/ld+json";
+      s.text = JSON.stringify(schema);
+      document.head.appendChild(s);
+    }
+  </script>
+
+  <!-- Press Releases Feed + Schema Script -->
+  <script>
+    const PRESS_RSS_URL = 'https://app.pressadvantage.com/feeds/channel/longmont-ledger?organization=longmont-ledger';
+    const PRESS_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(PRESS_RSS_URL)}`;
+
+    fetch(PRESS_PROXY)
+      .then(r => r.json())
+      .then(data => {
+        if (data.status !== 'ok' || !data.items) throw new Error('Bad feed');
+        const items = data.items.slice(0, 6);
+        renderPressFeed(items);
+        injectPressSchema(items);
+      })
+      .catch(() => {
+        document.getElementById('press-feed').innerHTML = '<p>Unable to load press releases at the moment.</p>';
+      });
+
+    function renderPressFeed(items) {
+      const feedDiv = document.getElementById('press-feed');
+      let html = `<h3>Latest Press Releases – Longmont Ledger</h3>`;
+      items.forEach(item => {
+        const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const desc = (item.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 180) + '…';
+        html += `
+          <div class="press-item">
+            <a href="${item.link}" target="_blank">${item.title}</a>
+            <div class="press-date">${date}</div>
+            <div class="press-desc">${desc}</div>
+          </div>`;
+      });
+      feedDiv.innerHTML = html;
+    }
+
+    function injectPressSchema(items) {
+      const listItems = items.map((it, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "Article",
+          "headline": it.title,
+          "url": it.link,
+          "datePublished": new Date(it.pubDate).toISOString().split('T')[0],
+          "description": (it.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 200) + "...",
+          "image": "https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png",
+          "author": {"@type": "Organization", "name": "Longmont Ledger"},
+          "publisher": {"@id": "https://longmontledger.com/#organization"}
+        }
+      }));
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Latest Press Releases – Longmont Ledger",
+        "itemListElement": listItems
       };
 
       const s = document.createElement('script');
