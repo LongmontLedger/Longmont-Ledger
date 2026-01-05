@@ -172,14 +172,22 @@
       </div>
     </section>
 
-    <!-- Live RSS Feed Section -->
+        <!-- Live RSS Feed Section -->
     <section>
       <div id="rss-feed">Loading the latest Longmont Ledger stories…</div>
     </section>
 
-    <!-- New Press Releases Section -->
+    <!-- Press Releases Placeholder Section -->
     <section>
-      <div id="press-feed">Loading the latest press releases…</div>
+      <div id="press-feed">
+        <h3>Latest Press Releases – Longmont Ledger</h3>
+        <p style="color:#4b5563;font-size:1rem;line-height:1.5;">
+          Press releases are coming soon! Local businesses, nonprofits, and organizations will be able to share their announcements here.
+        </p>
+        <p style="color:#6b7280;font-size:0.95rem;margin-top:1rem;">
+          Check back soon or <a href="mailto:info@longmontledger.com">contact us</a> if you'd like to submit one.
+        </p>
+      </div>
     </section>
 
   </div>
@@ -188,7 +196,7 @@
     © <script>document.write(new Date().getFullYear());</script> Longmont Ledger – All rights reserved.
   </footer>
 
-  <!-- Articles RSS Feed + Schema Script -->
+  <!-- Only the Articles RSS Feed Script remains -->
   <script>
     const ARTICLES_RSS_URL = 'https://longmontledger.com/feed/';
     const ARTICLES_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(ARTICLES_RSS_URL)}`;
@@ -241,69 +249,6 @@
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": "Latest Articles – Longmont Ledger",
-        "itemListElement": listItems
-      };
-
-      const s = document.createElement('script');
-      s.type = "application/ld+json";
-      s.text = JSON.stringify(schema);
-      document.head.appendChild(s);
-    }
-  </script>
-
-  <!-- Press Releases Feed + Schema Script -->
-  <script>
-    const PRESS_RSS_URL = 'https://app.pressadvantage.com/feeds/channel/longmont-ledger?organization=longmont-ledger';
-    const PRESS_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(PRESS_RSS_URL)}`;
-
-    fetch(PRESS_PROXY)
-      .then(r => r.json())
-      .then(data => {
-        if (data.status !== 'ok' || !data.items) throw new Error('Bad feed');
-        const items = data.items.slice(0, 6);
-        renderPressFeed(items);
-        injectPressSchema(items);
-      })
-      .catch(() => {
-        document.getElementById('press-feed').innerHTML = '<p>Unable to load press releases at the moment.</p>';
-      });
-
-    function renderPressFeed(items) {
-      const feedDiv = document.getElementById('press-feed');
-      let html = `<h3>Latest Press Releases – Longmont Ledger</h3>`;
-      items.forEach(item => {
-        const date = new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        const desc = (item.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 180) + '…';
-        html += `
-          <div class="press-item">
-            <a href="${item.link}" target="_blank">${item.title}</a>
-            <div class="press-date">${date}</div>
-            <div class="press-desc">${desc}</div>
-          </div>`;
-      });
-      feedDiv.innerHTML = html;
-    }
-
-    function injectPressSchema(items) {
-      const listItems = items.map((it, i) => ({
-        "@type": "ListItem",
-        "position": i + 1,
-        "item": {
-          "@type": "Article",
-          "headline": it.title,
-          "url": it.link,
-          "datePublished": new Date(it.pubDate).toISOString().split('T')[0],
-          "description": (it.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 200) + "...",
-          "image": "https://longmontledger.com/wp-content/uploads/2024/12/customcolor_logo_transparent_background200.png",
-          "author": {"@type": "Organization", "name": "Longmont Ledger"},
-          "publisher": {"@id": "https://longmontledger.com/#organization"}
-        }
-      }));
-
-      const schema = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "Latest Press Releases – Longmont Ledger",
         "itemListElement": listItems
       };
 
